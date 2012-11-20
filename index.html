@@ -1,0 +1,426 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Windows Recovery Essentials – NeoSmart Technologies</title>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link type="text/css" rel="stylesheet" media="screen" href="includes/reset.css"> 
+	<link type="text/css" rel="stylesheet" media="screen" href="includes/style.css"> 
+	<script type="text/javascript" src="includes/jquery.min.js"></script>
+</head>
+<body>
+	<div id="step1" class="step">
+	  <div class="header"><h1>Windows Recovery Essentials</h1></div>
+    <div class="text">
+      <p>Welcome to Windows Recovery Essentials. This recovery and repair CD will attempt to automatically find, diagnose, and fix problems with your PC. In addition to the automated repair tools, you may also perform advanced repairs from the command line, edit partitions, copy important files to an external drive, and access the web.</p>
+    </div>
+    <h3>Select a recovery option:</h3>
+    <div class="menu">
+      <form id="actionSelect">
+        <ul class="checkboxes">
+          <li>
+            <input type="radio" name="recoveryOption" id="automatedRepair" value="automatedRepair" checked="checked">
+            <label for="automatedRepair">
+              <img class="icon" src="#" height="24" width="24">
+              Automated Repair
+            </label>
+          <li>
+            <input type="radio" name="recoveryOption" id="gParted" value="gParted">
+            <label for="gParted">
+              <img class="icon" src="#" height="24" width="24">
+              Partition Editor
+            </label>
+          <li>
+            <input type="radio" name="recoveryOption" id="fileRecovery" value="fileRecovery">
+            <label for="fileRecovery">
+              <img class="icon" src="#" height="24" width="24">
+              Browse/Backup Files
+            </label>
+          <li>
+            <input type="radio" name="recoveryOption" id="webBrowser" value="webBrowser">
+            <label for="webBrowser">
+              <img class="icon" src="#" height="24" width="24">
+              Internet Browser
+            </label>
+          <li>
+            <input type="radio" name="recoveryOption" id="commandPrompt" value="commandPrompt">
+            <label for="commandPrompt">
+              <img class="icon" src="#" height="24" width="24">
+              Launch Command Line
+            </label>
+        </ul>
+      </form>
+    </div>
+		<div class="footer clearfix">
+		  <div class="left">
+        <form id="s1Reboot" onsubmit="return Reboot();">
+          <input type="submit" value="Exit">
+        </form>
+      </div>
+      <div class="right">
+        <form id="s1Recover" onsubmit="return RecoveryAction();">
+          <input type="submit" value="Continue">
+        </form>
+      </div>
+    </div>
+	</div>
+	<div id="step2" class="step">
+	  <div class="header"><h1>Windows Recovery Essentials</h1></div>
+    <div class="text">
+      <ul id="infoBox">
+        <li>Found and recovered a corrupted partition on sda2</li>
+        <li>Found a total of 3 drive(s) eligible for recovery.</li>
+        <li>Found a total of 3 drive(s) eligible for recovery.</li>
+      </ul>
+    </div>
+    <h3 id="errorBox">There may be a single error message displayed here.</h3>
+    <div class="menu">
+      <form id="recoverOS">
+        <ul class="labels clearfix">
+          <li class="w7 icon">&nbsp;
+          <li class="w45">Name
+          <li class="w16 num">Total Size
+          <li class="w16 num">Free Space
+          <li class="w16">Type
+        </ul>
+        <ul class="checkboxes tabular">
+          <li>
+            <input id="sdb1" type="radio" name="recoveryDevice" value="sdb1">
+            <label for="sdb1" class="clearfix">
+              <span class="w7 icon"><img class="icon" src="#" height="24" width="24"></span>
+              <span class="w45">Windows 7 64-Bit Edition (C:)</span>
+              <span class="w16 num">40.0 GB</span>
+              <span class="w16 num">35.5 GB</span>
+              <span class="w16">Dynamic</span>
+            </label>
+          <li>
+            <input id="sdb2" type="radio" name="recoveryDevice" value="sdb2">
+            <label for="sdb2" class="clearfix">
+              <span class="w7 icon"><img class="icon" src="#" height="24" width="24"></span>
+              <span class="w45">Windows XP 64-Bit Edition (D:)</span>
+              <span class="w16 num">40.0 GB</span>
+              <span class="w16 num">35.5 GB</span>
+              <span class="w16">Dynamic</span>
+            </label>
+          <li>
+            <input id="sdb5" type="radio" name="recoveryDevice" value="sdb5">
+            <label for="sdb5" class="clearfix">
+              <span class="w7 icon"><img class="icon" src="#" height="24" width="24"></span>
+              <span class="w45">Data Volume (E:)</span>
+              <span class="w16 num">40.0 GB</span>
+              <span class="w16 num">35.5 GB</span>
+              <span class="w16">Dynamic</span>
+            </label>
+        </ul>
+      </form>
+    </div>
+    <div class="footer clearfix">
+      <div class="left">
+        <form id="s2Back" onsubmit="return ShowStep1('step2');">
+          <input type="submit" value="Back">
+        </form>
+      </div>
+      <div class="right">
+        <form id="s2Recover" onsubmit="return RecoverOS();" style="">
+          <input class="disabled" type="submit" value="Automated Repair">
+        </form>
+        <form id="s2Restore" onsubmit="return GetRestorePoints();" style="">
+          <input type="submit" value="System Restore">
+        </form>
+      </div>
+    </div>
+	</div>
+	<div id="step3" class="step">
+	  <div class="header"><h1>Windows Recovery Essentials</h1></div>
+    <h3>Progress&hellip;</h3>
+    <div class="menu">
+      <ul id="progressBox">
+        <li>Preparing to repair partition on /dev/sdb1</li>
+        <li>Volume identified as ntfs</li>
+        <li>Scanning volume for errors and inconsistencies...</li>
+        <li>Volume check and repair complete. Additional consistency check scheduled for next startup.</li>
+        <li>Basic diagonstics run completed successfully.</li>
+        <li>Searching for boot-related problems...</li>
+        <li>Determining the bootloader to be installed...</li>
+        <li>Starting installation of the BOOTMGR bootloader to /dev/sdb1...</li>
+        <li>New bootloader installation successful.</li>
+        <li>Rewriting the MBR on /dev/sdb</li>
+        <li>Successfully reinstalled and reconfigured boot-related files.</li>
+      </ul>
+    </div>
+    <div class="footer clearfix">
+      <div class="left">
+        <form id="s3Back" onsubmit="return ShowStep1('step3');" style="">
+          <input type="submit" value="Back">
+        </form>
+      </div>
+      <div class="right">
+        <form id="s3Reboot" onsubmit="return Reboot();" style="">
+          <input type="submit" value="Restart">
+        </form>
+      </div>
+    </div>
+	</div>
+
+	<div id="stepRP" class="step">
+	  <div class="header"><h1>Windows Recovery Essentials</h1></div>
+    <div class="text">
+      <ul id="infoBoxRP">
+        <li>Found a total of 2 snapshot(s) availale for System Restore.</li>
+      </ul>
+    </div>
+    <h3>Select snapshot to restore.</h3>
+    <div class="menu">
+      <form id="restorePoints">
+        <ul class="checkboxes">
+          <li>
+            <input id="rp0" type="radio" name="restorePoint" value="0">
+            <label for="rp0">Snapshot on  3:00 am - March 31, 2012</label>
+          <li>
+            <input id="rp1" type="radio" name="restorePoint" value="1">
+            <label for="rp1">Snapshot on  1:00 am - March 31, 2012</label>
+        </ul>
+      </form>
+    </div>
+    <div class="footer clearfix">
+      <div class="left">
+        <form id="rpBack" onsubmit="return ShowStep2('stepRP');">
+          <input type="submit" value="Back">
+        </form>
+      </div>
+      <div class="right">
+        <form id="rpNext" onsubmit="return DoSystemRestore();">
+          <input type="submit" value="Restore">
+        </form>
+      </div>
+    </div>
+	</div>
+
+  <p id="copyright">&copy; NeoSmart Technologies 2012</p>
+
+	<script type="text/javascript">
+	    function ShowStep1(hideElement) {
+	        $("#" + hideElement).hide();
+	        $("#step1").show();
+
+	        return false;
+	    }
+
+	    function ShowStep2(hideElement) {
+	        $("#" + hideElement).hide();
+	        $("#step2").show();
+
+	        return false;
+	    }
+
+	    function ShowStep3(hideElement) {
+	        $("#" + hideElement).hide();
+	        $("#step3").show();
+	        $("#s3Back").hide();
+	        $("#s3Reboot").hide();
+
+	        return false;
+	    }
+
+	    function RecoveryAction() {
+	        var requestData = {
+	            recoveryOption: $('input[name=recoveryOption]:checked').val()
+	        };
+
+	        var drives = "CDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	        $.ajax({
+	            url: './launchRecovery',
+	            data: JSON.stringify(requestData),
+	            dataType: 'json',
+	            type: 'POST',
+	            success: function (j) {
+	                if (j.action == "none") {
+	                    return;
+	                }
+	                else if (j.action == "listOS") {
+	                    $("#step1").hide();
+	                    $("#step2").show();
+
+	                    $("#errorBox").text("").hide();
+	                    $("#infoBox").text("").hide();
+	                    $("#recoverOS").html("");
+
+	                    var count = 0;
+	                    jQuery.each(j.foundOS, function () {
+	                        var name;
+	                        if (this.corrupted) {
+	                            name = "Unmountable Volume";
+	                        }
+	                        else if (this.version >= 0 && this.version < 4) {
+	                            //valid OS
+	                            name = this.name + " (" + drives[count] + ":)";
+
+	                            if (this.repaired) {
+	                                $("#infoBox").show();
+	                                $("#infoBox").append("<li>Found and recovered a corrupted partition on " + this.device + "</li>");
+	                            }
+	                        }
+	                        else {
+	                            name = "Data Volume" + " (" + drives[count] + ":)";
+	                        }
+	                        $("#recoverOS").append("<input id='" + this.device + "' type='radio' name='recoveryDevice' value='" + this.device + "'>" + name + "</input>");
+	                        if (count++ == 0) {
+	                            $("#" + this.device).prop("checked", true);
+	                        }
+	                    });
+
+	                    if (count > 0) {
+	                        $("#infoBox").show();
+	                        $("#infoBox").append("<li>Found a total of " + count + " drive(s) eligible for recovery.</li>");
+	                        $("#s2Recover").show();
+	                        $("#s2Restore").show();
+	                    }
+	                    else {
+	                        $("#errorBox").show();
+	                        $("#errorBox").text("Unable to find any valid Windows partitions on this computer! Make sure all hard disks are attached. If they've been lost due to disk corruption, you can try to manually recover the partitions with testdisk at the command prompt.");
+	                    }
+
+	                }
+	            }
+	        });
+
+	        return false;
+	    }
+
+	    function GetNextMessage() {
+	        $.ajax({
+	            url: './getPendingMessage',
+	            dataType: 'json',
+	            type: 'POST',
+	            success: function (j) {
+	                $("#progressBox").append("<li>" + j.message + "</li>");
+
+	                if (!j.complete) {
+	                    GetNextMessage();
+	                }
+	                else {
+	                    $("#s3Back").show();
+	                    $("#s3Reboot").show();
+	                }
+	            }
+	        });
+	    }
+
+	    function Reboot() {
+	        var requestData = {
+	            confirmReboot: "true"
+	        };
+
+	        $.ajax({
+	            url: './reboot',
+	            data: JSON.stringify(requestData),
+	            dataType: 'json',
+	            type: 'POST'
+	        });
+
+	        return false;
+	    }
+
+	    function GetRestorePoints() {
+	        var requestData = {
+	            recoveryDevice: $('input[name=recoveryDevice]:checked').val()
+	        };
+
+	        $.ajax({
+	            url: './getRestorePoints',
+	            data: JSON.stringify(requestData),
+	            dataType: 'json',
+	            type: 'POST',
+	            success: function (j) {
+	                console.log(j);
+	                if (j.action == "listRP") {
+	                    $("#errorBox").text("").hide();
+	                    $("#infoBox").text("").hide();
+	                    $("#restorePoints").html("");
+
+	                    var count = 0;
+	                    jQuery.each(j.foundRP, function () {
+	                        $("#restorePoints").append("<input id='rp" + this.index + "' type='radio' name='restorePoint' value='" + this.index + "'>Snapshot on " + this.backupTime + "</input>");
+	                        if (count++ == 0) {
+	                            $("#rp" + this.index).prop("checked", true);
+	                        }
+	                    });
+
+	                    if (count > 0) {
+	                        $("#step2").hide();
+	                        $("#stepRP").show();
+
+	                        $("#infoBoxRP").show();
+	                        $("#infoBoxRP").html("<li>Found a total of " + count + " snapshot(s) availale for System Restore.</li>");
+	                    }
+	                    else {
+	                        $("#errorBox").show();
+	                        $("#errorBox").text("Unable to find any valid System Restore snapshots to restore for the selected OS.");
+	                    }
+
+	                }
+	            }
+	        });
+
+	        return false;
+	    }
+
+	    function DoSystemRestore() {
+	        var requestData = {
+	            restorePoint: $('input[name=restorePoint]:checked').val()
+	        };
+
+	        $.ajax({
+	            url: './doSystemRestore',
+	            data: JSON.stringify(requestData),
+	            dataType: 'json',
+	            type: 'POST',
+	            success: function (j) {
+	                console.log(j);
+	                if (j.success) {
+	                    ShowStep3("stepRP");
+	                    $("#progressBox").html("");
+
+	                    //Indefinitely listen for push messages from the server
+	                    GetNextMessage();
+	                }
+	                else {
+	                    $("#errorBox").show();
+	                    $("#errorBox").text(j.errorMessage);
+	                }
+	            }
+	        });
+
+	        return false;
+	    }
+
+	    function RecoverOS() {
+	        var requestData = {
+	            recoveryDevice: $('input[name=recoveryDevice]:checked').val()
+	        };
+
+	        $.ajax({
+	            url: './recoverDevice',
+	            data: JSON.stringify(requestData),
+	            dataType: 'json',
+	            type: 'POST',
+	            success: function (j) {
+	                console.log(j);
+	                if (j.success) {
+	                    $("#step2").hide();
+	                    $("#step3").show();
+	                    $("#progressBox").html("");
+
+	                    //Indefinitely listen for push messages from the server
+	                    GetNextMessage();
+	                }
+	                else {
+	                    $("#errorBox").show();
+	                    $("#errorBox").text(j.errorMessage);
+	                }
+	            }
+	        });
+
+	        return false;
+	    }
+	</script>
